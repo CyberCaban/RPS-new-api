@@ -18,6 +18,7 @@ app.get('/', (req,res)=>{
     res.send('working')
 })
 
+//подключение к сайту
 app.use(cors())
 
 let room;
@@ -27,10 +28,10 @@ io.on('connection', (socket) => {
 
     //присоединяем юзера к комнате
     socket.on('join room', (roomID)=>{
-        let elementArray = []
         room = roomID
         socket.join(roomID);
         
+        let elementArray = []
         socket.on('player_current_element', (current_element)=>{
             elementArray.push(current_element)
             if (elementArray.length == 2) {
@@ -47,7 +48,7 @@ io.on('connection', (socket) => {
 
     //получение сообщения сервером и отправка их юзеру
     socket.on('send message', (message)=>{
-        io.in(room).emit('getMessage', message)
+        io.emit('getMessage', message)
     })
 });
 
