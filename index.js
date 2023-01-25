@@ -7,7 +7,7 @@ const cors = require('cors')
 const io = new Server(server,
     {
         cors: {
-            origin:'https://rps-new.vercel.app/',
+            origin:'http://rps-new.vercel.app',
             methods:['GET', 'POST']
         }
     }
